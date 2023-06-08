@@ -1,0 +1,88 @@
+<%- include('./components/header')%>
+<body>
+    <%-include('./components/navigation')%>
+
+    
+    <form id="update_form" method="post" action="/functions/edit_category/<%= category.id %>">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="<%= category.categoryMainImage%>" style="width:100px" />
+                </div>
+                <div class="col-lg-5">
+                    <label class="form-label">Category name</label>
+                    <input type="text" name="categoryName" class="form-control" value="<%= category.categoryName%>">
+                </div>
+                <div class="col-lg-5">
+                    <label class="form-label">Category image</label>
+                    <input type="text" name="categoryMainImage" class="form-control" value="<%= category.categoryMainImage%>">
+                </div>
+                <div class="col-lg-2">
+                    <button form="update_form" style="margin-top: 30px" type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <br>
+  
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3">
+
+
+                    <form id="add_product_form" method="post" action="/functions/add_product/<%= category.id %>">
+                        <label class="form-label">product name</label>
+                        <input type="text" name="productName" class="form-control">
+                
+                        <label class="form-label">product image</label>
+                        <input type="text" name="productMainImage" class="form-control">
+                
+                        <label class="form-label">product price</label>
+                        <input type="text" name="productPrice" class="form-control">
+                
+                        <label class="form-label">product description</label>
+                        <input type="text" name="productDescription" class="form-control">
+                
+                        <label class="form-label">units in stock</label>
+                        <input type="text" name="unitInStock" class="form-control">
+                
+                        <button form="add_product_form" type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px;">Create New product</button>
+                        
+                    </form>
+                </div>
+
+                <div class="col-lg-9">
+
+
+
+                    <%for(let product of Products){%>
+                            <div class="row">
+                                <div class="col-lg-2"><img src="<%= product.productMainImage%>" style="width:100px" /></div>
+                                <div class="col-lg-1"><p>ID: <%= product.id%></p></div>
+                                <div class="col-lg-2"><p><%= product.productName%></p></div>
+                                <div class="col-lg-4"><p><%= product.productDescription%></p></div>
+                                <div class="col-lg-3">
+                                    <p>
+                                        <a href="/product/<%= product.id%>" class="btn btn-info">Edit</a>
+                                        <form id="delete_form" method="post" action="/functions/delete_product/<%= product.id %>">
+                                            <button form="delete_form" style="background-color: red; border-color: red;" type="submit" class="btn btn-info">Delete</button>
+                                        </form>
+                                    </p>
+                                </div>
+                            </div>
+                    <%}%>
+                    
+
+
+
+                </div>
+
+
+                
+            </div>
+        </div>
+    
+
+</body>

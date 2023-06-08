@@ -1,0 +1,49 @@
+<%- include('./components/header')%>
+<body>
+    <%-include('./components/navigation')%>
+
+    <form id="update_form" method="post" action="/functions/edit_product/<%= product.id %>">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="<%= product.productMainImage%>" style="width:100px" />
+                </div>
+                <div class="col-lg-4">
+                    Is available
+                    <select name="isAvailable" aria-label="Default select example" class="form-select">
+                        <%if(product.isAvailable == true){%>
+                            <option selected value="true">true</option>
+                            <option value="false">false</option>
+                            <%}else{%>
+                                <option value="true">true</option>
+                                <option selected value="false">false</option>
+                            <%}%>
+                    </select>
+
+                    category
+                    <select name="categoryID" aria-label="Default select example" class="form-select">
+                        <%for(let category of categories){%>
+                            <%if(category.id == product.categoryID){%>
+                                <option selected value="<%=category.id%>"><%=category.categoryName%></option>
+                            <%}else{%>
+                                    <option value="<%=category.id%>"><%=category.categoryName%></option>
+                            <%}%>
+                        <%}%>
+                    </select>
+
+                    <label class="form-label">product name</label>
+                    <input type="text" name="productName" class="form-control" value="<%= product.productName%>">
+                    <label class="form-label">product image</label>
+                    <input type="text" name="productMainImage" class="form-control" value="<%= product.productMainImage%>">
+                    <label class="form-label">product price</label>
+                    <input type="text" name="productPrice" class="form-control" value="<%= product.productPrice%>">
+                    <label class="form-label">product description</label>
+                    <input type="text" name="productDescription" class="form-control" value="<%= product.productDescription%>">
+                    <label class="form-label">units in stock</label>
+                    <input type="text" name="unitsInStock" class="form-control" value="<%= product.unitInStock%>">
+                    <button form="update_form" style="margin-top: 30px" type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
